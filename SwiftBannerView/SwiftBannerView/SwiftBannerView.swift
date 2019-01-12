@@ -180,6 +180,12 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
             bannerModel?.textBackGroundAlpha = defaultModel?.textBackGroundAlpha
         }
         
+        if bannerModel?.leftMargin != nil{
+            
+        }else{
+            bannerModel?.leftMargin = defaultModel?.leftMargin
+        }
+        
         var isNeedText : Bool = false
         if bannerModel?.textArr != nil {
             if bannerModel?.textArr?.count == ImageArr.count {
@@ -401,6 +407,31 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
         addSubview(collectionView)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.pageControl?.frame = CGRect(x: bannerModel?.leftMargin ?? 0, y: self.height - 30, width: self.width - 2 * (bannerModel?.leftMargin ?? 0), height: 30)
+        
+        layout?.itemSize = self.size
+        collectionView?.frame = self.bounds
+        collectionView?.collectionViewLayout = layout!
+        collectionView?.reloadData()
+        
+        if viewText != nil {
+            viewText?.frame = CGRect(x: bannerModel?.leftMargin ?? 0, y: self.height - (bannerModel?.textHeight)!, width: self.width - (bannerModel?.leftMargin ?? 0) * 2, height: (bannerModel?.textHeight)!)
+        }
+        
+        if ImageArr.count == 1 {
+            return
+        }
+        
+        var index = ImageArr.count * kAccount / 2
+        if bannerModel?.isNeedCycle == false {
+            index = 0
+        }
+        collectionView?.setContentOffset(CGPoint(x: CGFloat(Int((collectionView?.width)!) * index), y: 0), animated: false)
+    }
+    
     /// 初始化 默认数据
     private func initDefaultData(){
         
@@ -450,7 +481,7 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
             return
         }
         
-        let pageControl = SwiftBannerPageControl.init(frame: CGRect(x: 0, y: self.height - 30, width: self.width, height: 30))
+        let pageControl = SwiftBannerPageControl.init(frame: CGRect(x: bannerModel?.leftMargin ?? 0, y: self.height - 30, width: self.width - 2 * (bannerModel?.leftMargin ?? 0), height: 30))
         pageControl.isHidden = true
         self.pageControl = pageControl
         addSubview(pageControl)
@@ -458,7 +489,7 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     
     /// 初始化 .stay模型下的 文字父控件
     private func initViewText(){
-        let viewText : SwiftBannerViewText = SwiftBannerViewText(frame: CGRect(x: 0, y: self.height - (bannerModel?.textHeight)!, width: self.width, height: (bannerModel?.textHeight)!))
+        let viewText : SwiftBannerViewText = SwiftBannerViewText(frame: CGRect(x: bannerModel?.leftMargin ?? 0, y: self.height - (bannerModel?.textHeight)!, width: self.width - (bannerModel?.leftMargin ?? 0) * 2, height: (bannerModel?.textHeight)!))
         viewText.bannerM  = bannerModel
         viewText.text = bannerModel?.textArr?.firstObject as? String
         self.viewText = viewText
@@ -619,7 +650,7 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
                     }
                     
                     let path : IndexPath = NSIndexPath(row: Int(scrollView.contentOffset.x / scrollView.frame.size.width), section: 0) as IndexPath
-                    collectionUseCell = collectionView?.cellForItem(at: path) as! SwiftBannerCollectioniewCell!
+                    collectionUseCell = collectionView?.cellForItem(at: path) as? SwiftBannerCollectioniewCell
                     
                     if bannerModel?.bgChangeColorArr?.count != 0 {
                         if let delegate = self.delegate {
