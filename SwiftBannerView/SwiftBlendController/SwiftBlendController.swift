@@ -156,5 +156,10 @@ class SwiftBlendController: RootController , SwiftBannerViewDelegate{
     func bannerView(_ bannerView: SwiftBannerView, collectionView: UICollectionView, collectionViewCell: SwiftBannerCollectioniewCell, didSelectItemAtIndexPath index: Int) {
         print("BannerView : \(bannerView.tag) -->  index : \(index)")
     }
-    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        bannerView1?.frame = CGRect(x: 0, y: 30, width: view.width, height: 180)
+        bannerView2?.frame = CGRect(x: 0, y: 60 + 180, width: view.width, height: 180)
+        bannerView3?.frame = CGRect(x: 0, y: 60 + 180 + 30 + 180, width: view.width, height: 180)
+    }
 }

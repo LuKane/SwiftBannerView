@@ -23,7 +23,6 @@ class SwiftNetworkController: RootController ,SwiftBannerViewDelegate {
         return changeArr
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "网络图片"
@@ -152,4 +151,10 @@ class SwiftNetworkController: RootController ,SwiftBannerViewDelegate {
         print("BannerView : \(bannerView.tag) -->  index : \(index)")
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        bannerView1?.frame = CGRect(x: 0, y: 30, width: view.width, height: 180)
+        bannerView2?.frame = CGRect(x: 0, y: 60 + 180, width: view.width, height: 180)
+        bannerView3?.frame = CGRect(x: 0, y: 60 + 180 + 30 + 180, width: view.width, height: 180)
+    }
 }

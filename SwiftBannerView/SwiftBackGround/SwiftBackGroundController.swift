@@ -142,4 +142,12 @@ class SwiftBackGroundController: RootController,SwiftBannerViewDelegate {
         }
         
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        bannerView1?.frame = CGRect(x: 0, y: 60, width: view.width, height: 180)
+        
+        topImageView?.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 180)
+        bottomImageView?.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 180)
+    }
 }

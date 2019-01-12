@@ -84,5 +84,10 @@ class ViewController: RootController,UITableViewDelegate,UITableViewDataSource{
             default: break
         }
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.tableView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: self.view.height)
+    }
 }
 

@@ -45,4 +45,9 @@ class RootController: UIViewController {
         self.scrollView = scrollView
         view.addSubview(scrollView)
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.scrollView?.frame = self.view.bounds
+    }
 }
