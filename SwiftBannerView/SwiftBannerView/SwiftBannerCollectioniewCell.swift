@@ -95,8 +95,13 @@ class SwiftBannerCollectioniewCell: UICollectionViewCell {
         if bannerM?.bannerCornerRadius != nil && bannerM?.bannerCornerRadius != 0 {
             self.imageView?.layer.cornerRadius = (bannerM?.bannerCornerRadius)!
         }
+        
         if bannerM?.isNeedText == true {
-            viewText?.frame = CGRect(x: 0, y: self.height - (bannerM?.textHeight)!, width: self.width, height: (bannerM?.textHeight)!)
+            if bannerM?.leftMargin != nil && bannerM?.leftMargin != 0 {
+                viewText?.frame = CGRect(x: (bannerM?.leftMargin)!, y: self.height - (bannerM?.textHeight)!, width: self.width - 2 * (bannerM?.leftMargin)!, height: (bannerM?.textHeight)!)
+            }else{
+                viewText?.frame = CGRect(x: 0, y: self.height - (bannerM?.textHeight)!, width: self.width, height: (bannerM?.textHeight)!)
+            }
         }
     }
 }
