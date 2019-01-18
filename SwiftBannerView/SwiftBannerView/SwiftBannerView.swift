@@ -303,6 +303,11 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     
     /// 刷新 --> 提供做API 方法(切换banner的图片时候才调用的)
     @objc public func reloadData(){
+        
+        if ImageArr.count == 0 {
+            return;
+        }
+        
         initDefaultData()
         bannerModel?.numberOfPages = ImageArr.count
         
@@ -466,6 +471,19 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     
     /// 初始化 pageControl 以及跳转到指定位置
     private func initPageAndJumpToLocation(){
+        guard ImageArr.count > 1 else {
+            if pageControl != nil {
+                pageControl?.removeFromSuperview()
+                pageControl = nil
+            }
+            
+            if viewText != nil {
+                viewText?.removeFromSuperview()
+                viewText = nil
+            }
+            
+            return
+        }
         initPageControl()
         jumpToLocation()
     }
@@ -477,7 +495,7 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
             return
         }
         
-        if ImageArr.count == 1 {
+        guard ImageArr.count > 1 else {
             return
         }
         
@@ -624,6 +642,10 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        guard ImageArr.count > 1 else {
+            return
+        }
         
         let contentOffsetX : CGFloat = (CGFloat(Int(scrollView.contentOffset.x)) + scrollView.width) / scrollView.width
         autoreleasepool {

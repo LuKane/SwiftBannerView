@@ -51,7 +51,7 @@ class SwiftLocationController: RootController , SwiftBannerViewDelegate{
     }
     
     @objc func rightBtnDidClick(){
-        bannerView1?.locationImageArr = changeArr.mutableCopy() as! NSMutableArray
+        bannerView1?.locationImageArr = NSMutableArray().mutableCopy() as! NSMutableArray
         bannerView2?.locationImageArr = changeArr.mutableCopy() as! NSMutableArray
         bannerView3?.locationImageArr = changeArr.mutableCopy() as! NSMutableArray
         
