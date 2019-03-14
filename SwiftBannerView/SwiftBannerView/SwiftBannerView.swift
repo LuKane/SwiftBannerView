@@ -57,6 +57,8 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     private var _firstSet : Bool = false
     // 滑动到中间时,偏移量
     private var lastContentOffsetX : CGFloat?
+    // 记录 屏幕旋转前的下标
+    private var indexPathRow : Int = 0
     
     /// 公开一个 bannerModel , 用于设置 banner的各种属性
     public var bannerModel : SwiftBannerModel? {
@@ -266,7 +268,7 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     }
     
     /// 重写 混合图片数组
-    var blendImageArr : NSMutableArray = [] {
+    var blendImageArr   : NSMutableArray = [] {
         didSet{
             ImageArr.removeAllObjects()
             collectionView?.reloadData()
@@ -291,7 +293,7 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     }
     
     /// 重写 修改背景色的数组
-    var changeColorArr : NSMutableArray = [] {
+    var changeColorArr  : NSMutableArray = [] {
         didSet {
             if changeColorArr.count != 0 {
                 bannerModel?.bgChangeColorArr = NSMutableArray(array: changeColorArr)
@@ -327,7 +329,8 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     /// - Parameter frame: frame
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        // 增加屏幕旋转的监听
+        addObserverForScreenRotate()
         // 初始化 collectionView
         initCollectionView()
         // 初始化 基本数据
@@ -335,6 +338,19 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    @objc private func addObserverForScreenRotate() -> Void {
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceDidOrientation), name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil)
+    }
+    
+    @objc private func deviceDidOrientation()  -> Void {
+        if ImageArr.count == 1 {
+            return
+        }
+        
+        collectionView?.setContentOffset(CGPoint(x: CGFloat(Int((collectionView?.width)!) * indexPathRow), y: 0), animated: false)
     }
     
     /// 类方法创建 本地 图片轮播器
@@ -426,15 +442,16 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
             viewText?.frame = CGRect(x: bannerModel?.leftMargin ?? 0, y: self.height - (bannerModel?.textHeight)!, width: self.width - (bannerModel?.leftMargin ?? 0) * 2, height: (bannerModel?.textHeight)!)
         }
         
-        if ImageArr.count == 1 {
-            return
-        }
-        
-        var index = ImageArr.count * kAccount / 2
-        if bannerModel?.isNeedCycle == false {
-            index = 0
-        }
-        collectionView?.setContentOffset(CGPoint(x: CGFloat(Int((collectionView?.width)!) * index), y: 0), animated: false)
+//        if ImageArr.count == 1 {
+//            return
+//        }
+//
+//        var index = ImageArr.count * kAccount / 2
+//        if bannerModel?.isNeedCycle == false {
+//            index = 0
+//        }
+//
+//        collectionView?.setContentOffset(CGPoint(x: CGFloat(Int((collectionView?.width)!) * index), y: 0), animated: false)
     }
     
     /// 初始化 默认数据
@@ -671,6 +688,8 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
                         pageControl?.currentPage = index
                     }
                     
+                    indexPathRow = index
+                    
                     let path : IndexPath = NSIndexPath(row: Int(scrollView.contentOffset.x / scrollView.frame.size.width), section: 0) as IndexPath
                     collectionUseCell = collectionView?.cellForItem(at: path) as? SwiftBannerCollectioniewCell
                     
@@ -741,6 +760,8 @@ class SwiftBannerView: UIView , UICollectionViewDelegate , UICollectionViewDataS
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
+        removeTimer()
         print("SwiftBannerView -> deinit")
     }
 }
