@@ -4,7 +4,7 @@
 * Swift 4.0 +
 * platform : iOS 10.0 +
 
-#### Object-c 版本
+#### Objective-c 版本
 [KNBannerView](https://github.com/LuKane/KNBannerView)
 
 #### 无限循环轮播器:
