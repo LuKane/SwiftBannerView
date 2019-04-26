@@ -16,6 +16,7 @@ class ViewController: RootController,UITableViewDelegate,UITableViewDataSource{
         dataArr.add("SwiftNetworkController")
         dataArr.add("SwiftBlendController")
         dataArr.add("SwiftBackGroundController")
+        dataArr.add("SwiftBlendNetworkController")
         return dataArr
     }();
     
@@ -81,6 +82,11 @@ class ViewController: RootController,UITableViewDelegate,UITableViewDataSource{
                 let vc = SwiftBackGroundController()
                 navigationController?.pushViewController(vc, animated: true)
                 break
+            case 4:
+                let vc = SwiftBlendNetworkController()
+                navigationController?.pushViewController(vc, animated: true)
+                break
+            
             default: break
         }
     }

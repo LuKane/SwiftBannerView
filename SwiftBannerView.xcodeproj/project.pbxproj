@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		295A4552E3702C148D5F680D /* Pods_SwiftBannerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EE44A70078B6B37D996B66 /* Pods_SwiftBannerView.framework */; };
+		7922923F2273416C00BE1B63 /* SwiftBlendNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922923E2273416C00BE1B63 /* SwiftBlendNetworkController.swift */; };
 		793533F220BBE0CE0076D887 /* SwiftBannerViewText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793533F120BBE0CE0076D887 /* SwiftBannerViewText.swift */; };
 		7983F1AA20B290AA00A83C2F /* SwiftBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983F1A920B290AA00A83C2F /* SwiftBannerModel.swift */; };
 		799F2A3F20AED366006DD727 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F2A3E20AED366006DD727 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		37EE44A70078B6B37D996B66 /* Pods_SwiftBannerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftBannerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B52E079E73BF2B5F3074FBA /* Pods-SwiftBannerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftBannerView.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftBannerView/Pods-SwiftBannerView.release.xcconfig"; sourceTree = "<group>"; };
+		7922923E2273416C00BE1B63 /* SwiftBlendNetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBlendNetworkController.swift; sourceTree = "<group>"; };
 		793533F120BBE0CE0076D887 /* SwiftBannerViewText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBannerViewText.swift; sourceTree = "<group>"; };
 		7983F1A920B290AA00A83C2F /* SwiftBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBannerModel.swift; sourceTree = "<group>"; };
 		799F2A3B20AED366006DD727 /* SwiftBannerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftBannerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7922923D2273414800BE1B63 /* SwiftBlendController(模仿网络请求) */ = {
+			isa = PBXGroup;
+			children = (
+				7922923E2273416C00BE1B63 /* SwiftBlendNetworkController.swift */,
+			);
+			path = "SwiftBlendController(模仿网络请求)";
+			sourceTree = "<group>";
+		};
 		799F2A3220AED366006DD727 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 				799F2A3E20AED366006DD727 /* AppDelegate.swift */,
 				799F2A6C20AED7D2006DD727 /* RootController.swift */,
 				799F2A4020AED366006DD727 /* ViewController.swift */,
+				7922923D2273414800BE1B63 /* SwiftBlendController(模仿网络请求) */,
 				79A28E7A20F73E02003D8C2E /* SwiftBackGround */,
 				799F2A7320AEDD98006DD727 /* SwiftLocationController */,
 				799F2A7220AEDD98006DD727 /* SwiftNetworkController */,
@@ -408,6 +419,7 @@
 				79F1C45F20B26A2F00C537EF /* SwiftFrame+Extension.swift in Sources */,
 				799F2A3F20AED366006DD727 /* AppDelegate.swift in Sources */,
 				79A28E7E20F73F8B003D8C2E /* UIColor+Extension.swift in Sources */,
+				7922923F2273416C00BE1B63 /* SwiftBlendNetworkController.swift in Sources */,
 				793533F220BBE0CE0076D887 /* SwiftBannerViewText.swift in Sources */,
 				799F2A7020AEDCBA006DD727 /* SwiftBannerView.swift in Sources */,
 				799F2A6D20AED7D2006DD727 /* RootController.swift in Sources */,
